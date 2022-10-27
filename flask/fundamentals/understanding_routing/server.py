@@ -15,7 +15,7 @@ def hi(name):
     print(name)
     return 'Hi, ' + name + '!'
 
-@app.route('/repeat/<num>/<name>')
+@app.route('/repeat/<int:num>/<name>')
 def repeat(num, name):
     num = int(num)
     print(name * num)

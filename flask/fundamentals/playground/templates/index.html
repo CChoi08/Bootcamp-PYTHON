@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    }
+
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .justCenter {
+        justify-content: center;
+    }
+
+    .square {
+    height: 200px;
+    width: 200px;
+    background-color: {{color}};
+    border: 3px solid black;
+    margin: 10px;
+    }
+    </style>
+
+
+</head>
+
+<body>
+
+    <main class="flex justCenter">
+
+        {% for i in range(times) %}
+        <div class="square"></div>
+        {% endfor %}
+
+    </main>
+</body>
+</html>
