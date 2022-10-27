@@ -7,20 +7,21 @@ def hello_world():
 
 # import statements, maybe some other routes
     
-@app.route('/success')
-def success():
-  return "success"
+@app.route('/dojo')
+def dojo():
+  return "Dojo!"
 
-@app.route('/hello/<name>') # for a route '/hello/____' anything after '/hello/' gets passed as a variable 'name'
-def hello(name):
+@app.route('/say/<name>') # for a route '/Hi/____' anything after '/hello/' gets passed as a variable 'name'
+def say(name):
     print(name)
-    return "Hello, " + name
+    return "Hi, " + name + "!"
 
-@app.route('/users/<username>/<id>') # for a route '/users/____/____', two parameters in the url get passed as username and id
-def show_user_profile(username, id):
-    print(username)
-    print(id)
-    return "username: " + username + ", id: " + id
+@app.route('/users/<x>/<saying>') # for a route '/users/____/____', two parameters in the url get passed as username and id
+def show_user_profile(x, saying):
+    print(int(x))
+    print(saying)
+    return x * saying
+
 
 # app.run(debug=True) should be the very last statement! 
 
