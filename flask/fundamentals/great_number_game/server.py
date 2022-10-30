@@ -5,17 +5,20 @@ app.secret_key = 'pineapple chunks'
 
 @app.route('/')
 def guessHome():
-    for random_num in session:
-        session['random_num'] = random.randint(1,100)
-    return render_template('index.html', random_num = session['random_num'])
+    if 'randomNum' not in session:
+        session['randomNum'] = random.randint(1,100)
+        print(session['randomNum'])
+    return render_template('index.html')
 
-# @app.route('/wrong', method = ['POST'])
-# def tooLow():
-#     pass
+@app.route('/guess', methods = ['POST'])
+def guess():
+    session['guess'] = int(request.form['guess'])
+    return redirect('/')
 
-# @app.route('/wrong', method = ['POST'])
-# def tooHigh():
-#     pass
+@app.route('/reset')
+def playAgain():
+    session.clear()
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug = True)
