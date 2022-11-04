@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Ninja</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+
+<body class="d-flex justify-content-center" style="background-color: lightslategray;">
+
+    <main>
+        <form action="/ninjas/create", method = "post" class="form form-control
+        bg-secondary p-3 border-secondary rounded-4 mt-5 fs-4 m-3">
+
+            <h1 class="text-warning">New Ninja Application</h1>
+
+            <div class="my-3">
+                <label for="first_name" class="form-label">First Name: </label>
+                <input type="text" name="first_name" id="first_name" class="form-control">
+            </div>
+
+            <div class="my-3">
+                <label for="last_name" class="form-label">Last Name: </label>
+                <input type="text" name="last_name" id="last_name" class="form-control">
+            </div>
+
+            <div>
+                <label for="age" class="form-label">Age: </label>
+                <input type="number" name="age" id="age" class="form-control">
+            </div>
+
+            <div class="my-3">
+                <label for="dojo_id" class="form-label">Select a Dojo: </label>
+                <select name="dojo_id" id="dojo_id" class="form-control">
+                    {% for one_dojo in all_dojos %}
+                    <option value="{{one_dojo.id}}">{{ one_dojo.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-between mt-3">
+                <a href="/" class="btn bg-warning" style="font-size: 16pt;">Back</a>
+                <button class="btn bg-warning" style="font-size: 16pt;">Submit</button>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>
