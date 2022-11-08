@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
+from flask_app.models import recipe_model
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -41,24 +42,31 @@ class User:
     def get_by_id(cls,data):
         query = '''
             SELECT * FROM users
-            WHERE id = %(id)s;
+            LEFT JOIN recipes ON users.id = recipes.user_id
+            WHERE users.id = %(id)s;
         '''
         results = connectToMySQL(DATABASE).query_db(query, data)
-        if len(results) < 1:
-            return False
-        return cls(results[0])
+        if results:
+            recipe_list = []
+            this_user = cls(results[0])
+            for row in results:
+                recipe_data = {
+                    **row,
+                    'id' : row['recipes.id'],
+                    'created_at' : row['recipes.created_at'],
+                    'updated_at' : row['recipes.updated_at']
+                }
+                this_recipe_instance = recipe_model.Recipe(recipe_data)
+                recipe_list.append(this_recipe_instance)
+            this_user.recipes = recipe_list
+            return this_user
+        return False
 
-# ---------------------STATICMETHODS-------------------------
+# ---------------------CLASSMETHODS-------------------------
 
     @staticmethod
     def validator(data):
         is_valid = True
-        # query = '''
-        #     SELECT * FROM users
-        #     WHERE email = %(email)s;
-        # '''
-        # results = connectToMySQL(DATABASE).query_db(query, data)
-
         if len(data['first_name']) < 1:
             flash('First Name Required', 'reg')
             is_valid = False
