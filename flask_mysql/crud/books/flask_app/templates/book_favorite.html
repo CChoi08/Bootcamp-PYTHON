@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Favorites</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="d-flex justify-content-center pt-5">
+        <div>
+            <div class="border rounded-4 m-5 p-3">
+    
+            <h1 class="fw-bold">Title: {{ all_authors.title }}</h1> 
+    
+            <table>
+                <thead>
+                    <tr>
+                        <th>Favorited by:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for one_author in some_authors %}
+                    <tr>
+                        <td class="fs-4">
+                            <a href="">{{ one_author.name }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+    
+        </div>
+        
+        <div class="border rounded-4 m-5 p-3">
+            <h1 class="fw-bold">Add a Book's Favorite</h1>
+            
+            <form action="/books/{{ all_authors.id }}/favorite", method="post">
+                <label for="book" class="form-label fs-4">Author: </label>
+                <select name="author_id" class="form-control">
+                    {% for author in some_authors %}
+                        <option value="{{author.id}}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+    
+                <button class="btn btn-primary mt-3">Add Favorite</button>
+            </form>
+        </div>
+    </div>
+    
+    <a href="/" style="margin-left:220px;"
+    class="btn btn-primary">Home</a>
+</body>
+</html>

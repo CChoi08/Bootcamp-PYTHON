@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors Page</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+
+<body class="d-flex justify-content-center pt-5">
+
+    <div class="border rounded-4 m-5 p-3">
+        <h1 class="fw-bold">New Author</h1>
+        
+        <form action="/authors/create", method="post">
+            <label for="name" class="form-label fs-4">Name: </label>
+            <input type="text" name="name" id="name" class="form-control">
+
+            <button class="btn btn-primary mt-3">Create</button>
+        </form>
+    </div>
+
+    <div>
+        <div class="border rounded-4 m-5 p-3">
+        <h1 class="fw-bold">All Authors</h1>
+
+        <table>
+            <tbody>
+                {% for one_author in all_authors %}
+                <tr>
+                    <td class="fs-4">
+                        <a href="/authors/{{ one_author.id }}">{{ one_author.name }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+        <a href="/books/new" style="margin-left:50px;"
+        class="btn btn-primary">Add Book</a>
+    </div>
+
+</body>
+</html>
